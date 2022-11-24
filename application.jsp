@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import= "java.util.*" %>
+<%@ page import= "common.Person" %>
+
+<%
+	Map<String,Person>maps = new HashMap<>();
+	maps.put("actor1",new Person("홍길동",20));
+	maps.put("actor2",new Person("임꺽정",30));
+	application.setAttribute("maps",maps);//앞에 맵은 속성, 뒤에 맵은 객체
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>web.xml</title>
+<title>application</title>
 </head>
 <body>
-	<h2>web.xml에 설정한 내용 읽어오기</h2>
-	초기화 매개변수 : <%=application.getInitParameter("INIT_PARAM") %>
-	<h2>서버의 물리적 경로 알아보기</h2>
-	application 내장객체 : <%=application.getRealPath("/") %>
-	<br/><br/>
-	request 내장객체 : <%=request.getRealPath("/") %>
+	<a href="ApplicationResult.jsp">ApplicationResult.jsp바로가기</a>
 </body>
 </html>
