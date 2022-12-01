@@ -123,14 +123,44 @@ public class BoardDAO extends JDBConnect{
  		   e.printStackTrace();
    		}
    	}
-
-
-
-
-
-
-
-
-
-
+   	
+//지정한 게시물을 수정합니다. 코드
+   	public int updateEdit(BoardDTO dto) {
+   		int result = 0;
+   		
+   		try {
+   			//쿼리문 템플릿
+   			String query = "update board SET"
+   						+ " title=?, content=? "
+   						+ " where num= ?";
+   			//쿼리문 완성
+   			psmt = con.prepareStatement(query);
+   			psmt.setString(1, dto.getTitle());
+   			psmt.setString(2, dto.getContent());
+   			psmt.setString(3, dto.getNum());
+   		
+   			result = psmt.executeUpdate();//쿼리문 실행
+   		}catch(Exception e) {
+  		   System.out.println("게시물 수정 중 예외 발생");
+   			e.printStackTrace();
+   		
+   		}
+   		return result;//결과반환
+   	}
+   	
+   	public int deletePost(BoardDTO dto) {
+   		int result = 0;
+   		
+   		String query = "delete from board where num = ?";
+   		
+   		try {			
+   			//쿼리문 완성
+   			psmt = con.prepareStatement(query);
+   			psmt.setString(1, dto.getNum());//java.sql.SQLSyntaxErrorException: ORA-01722: 수치가 부적합합니다 쿼리문 오류
+   			result = psmt.executeUpdate(); //쿼리문 실행
+   		}catch(Exception e) {
+   			e.printStackTrace();
+   		}
+   		return result;//결과반환
+   	}
 }
